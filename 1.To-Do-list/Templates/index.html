@@ -6,5 +6,34 @@
   TO DO LIST
 {% endblock %}
 {% block content %}
-  
+ <form action="{{ url_for('home')}}" method="post">
+    <input type="text" name="title" id="To_do_item" placeholder="What do you have to do">
+    <button type="submit" class="addBtn">Add</button>
+  </form>
+<table class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <!-- Your Columns HERE -->
+                <th scope="col">ID</th>
+                <th scope="col">What you need to do</th>
+                <th scope="col">Time</th>
+                <th scope="col">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Your rows inside the table HERE: -->
+            {% for item in list %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.task }}</td>
+                    <td>{{ item.Time }}</td>
+                    <td>{{ item.active }}</td>
+                    <td>
+                        <button class="btn btn-outline btn-info">More Info</button>
+                        <button class="btn btn-outline btn-success">Purchase this Item</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
