@@ -27,9 +27,11 @@
                     <td>{{ item.Time }}</td>
                     <td>
                         {% if item.active%}
-                        <button class="btn btn-outline btn-info">Mark as Done</button>
-                        <button type="button" class="btn btn-dark">Edit</button>
-                        <button class="btn btn-outline btn-success">Delete</button>
+                        <form class="form-inline" action="{{ url_for('home')}}" method="post">
+                        <button class="btn btn-outline btn-info" type="submit" value="Done">Mark as Done</button>
+                        <button type="button" class="btn btn-dark" type="submit" value="Edit">Edit</button>
+                        <button class="btn btn-outline btn-success" type="submit" value="Delete">Delete</button>
+                        </form>
                         {% else %}
                         <button class="btn btn-outline btn-info">Mark as Done</button>
                         <button class="btn btn-outline btn-success">Delete</button>
