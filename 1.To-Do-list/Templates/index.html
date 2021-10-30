@@ -6,37 +6,50 @@
   TO DO LIST
 {% endblock %}
 {% block content %}
- <form class="form-inline" action="{{ url_for('home')}}" method="post">
+<!--form to add the new item in the list-->
+<style>
+form-inline{
+  text-align: center;
+}
+</style>
+<br>
+<center>
+<form class="form-inline" action="{{ url_for('home')}}" method="post">
     <input class="form-control form-control-lg" type="text" name="title" id="To_do_item" placeholder="What do you have to do">
     <button type="submit" class="btn btn-primary">Add</button>
-  </form>
+</form>
+</center>
+<br>
 <table class="table table-hover table-dark">
         <thead>
             <tr>
-                <!-- Your Columns HERE -->
+                <!-- Columns names are HERE -->
+                <th scope="col">Status</th>
                 <th scope="col">What you need to do</th>
                 <th scope="col">Time</th>
-                <th scope="col">Options</th>
             </tr>
         </thead>
         <tbody>
             <!-- Your rows inside the table HERE: -->
             {% for item in items%}
                 <tr>
-                    <td>{{ item.task }}</td>
-                    <td>{{ item.Time }}</td>
-                    <td>
-                        {% if item.active%}
-                        <form class="form-inline" action="{{ url_for('home')}}" method="post">
-                        <button class="btn btn-outline btn-info" type="submit" value="Done">Mark as Done</button>
-                        <button type="button" class="btn btn-dark" type="submit" value="Edit">Edit</button>
-                        <button class="btn btn-outline btn-success" type="submit" value="Delete">Delete</button>
-                        </form>
-                        {% else %}
-                        <button class="btn btn-outline btn-info">Mark as Done</button>
+                    {% if item.active%}
+                        <td>Incomplete</td>
+                        <td>{{ item.task }}</td>
+                        <td>{{ item.Time }}</td>
+                        <td>
+                            <a href="{{ url_for('home')}}/?cngstat={{item.id}}">
+                            <button class="btn btn-outline btn-info">Mark as Done</button></a>
+                            <button class="btn btn-outline btn-success">Delete</button>                                
+                        </td>
+                    {% else %}
+                        <td>Done</td>
+                        <td>{{ item.task }}</td>
+                        <td>{{ item.Time }}</td>
+                        <td>
                         <button class="btn btn-outline btn-success">Delete</button>
-                        {% endif %}
-                    </td>
+                        </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </tbody>

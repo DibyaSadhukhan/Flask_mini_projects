@@ -18,17 +18,26 @@ class item(db.Model):
 @app.route('/',methods=['POST','GET'])
 @app.route('/home',methods=['POST','GET'])
 def home(): 
-    if flask.request.method == 'POST':
-        next_todo=flask.request.form['title']
-        #print(next_todo)
-        now = datetime.now()
-        current_time = now.strftime("%H:%M:%S")
-        db.session.add(item(task=next_todo,Time=current_time,active=1))
-        db.session.commit()
-        Lists=item.query.all()
-        print(Lists)
-        return (flask.render_template('index.html',items=reversed(Lists)))
-    else:
+    try: 
+        if flask.request.method == 'POST':
+            next_todo=flask.request.form['title']
+            now = datetime.now()
+            current_time = now.strftime("%H:%M:%S")
+            db.session.add(item(task=next_todo,Time=current_time,active=1))
+            db.session.commit()
+            Lists=item.query.all()
+            #print(Lists)
+            return (flask.render_template('index.html',items=reversed(Lists)))
+        elif flask.request.method == 'GET':
+            print(flask.request)
+        else:
+            item.query.delete()
+            db.session.add(item(task="Add something in the To Do list",Time="00:00:00",active=1))
+            db.session.commit()
+            Lists=item.query.all()
+            return (flask.render_template('index.html',items=Lists))    
+    except:
+        db.session.rollback()
         item.query.delete()
         db.session.add(item(task="Add something in the To Do list",Time="00:00:00",active=1))
         db.session.commit()
