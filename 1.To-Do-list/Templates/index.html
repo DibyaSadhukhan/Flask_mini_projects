@@ -51,6 +51,15 @@ form-inline{
                         </td>
                     {% endif %}
                 </tr>
+            {% else %}
+                <tr>
+                    <td>Incomplete</td>
+                    <td>Add something to the to do list</td>
+                    <td>00:00:00</td>
+                    <td>
+                        <button class="btn btn-outline btn-success">Don't you dare press this button </button>                                
+                    </td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>
