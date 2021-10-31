@@ -1,25 +1,24 @@
+<!--extending the base template-->
 {% extends 'base.html' %}
+<!-- page title-->
 {% block title %}
   To Do List
 {% endblock %}
 {% block page_heading%}
   TO DO LIST
+  <!--Page heading-->
 {% endblock %}
 {% block content %}
 <!--form to add the new item in the list-->
-<style>
-form-inline{
-  text-align: center;
-}
-</style>
 <br>
-<center>
+<div class="Form_container">
 <form class="form-inline" action="{{ url_for('home')}}" method="post">
     <input class="form-control form-control-lg" type="text" name="title" id="To_do_item" placeholder="What do you have to do">
     <button type="submit" class="btn btn-primary">Add</button>
 </form>
-</center>
+</div>
 <br>
+<!--Table to display the data-->
 <table class="table table-hover table-dark">
         <thead>
             <tr>
@@ -34,33 +33,53 @@ form-inline{
             {% for item in items%}
                 <tr>
                     {% if item.active%}
-                        <td>Incomplete</td>
+                        <td bgcolor= "red">Incomplete</td>
                         <td>{{ item.task }}</td>
                         <td>{{ item.Time }}</td>
                         <td>
-                            <a href="{{ url_for('home')}}/?cngstat={{item.id}}">
-                            <button class="btn btn-outline btn-info">Mark as Done</button></a>
-                            <button class="btn btn-outline btn-success">Delete</button>                                
+                            <form action="{{ url_for('change')}}" method="post">
+                            <button class="btn btn-outline btn-info" name="Status" value="{{item.id}}">Mark as Done</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{{ url_for('delete')}}" method="post">
+                            <button class="btn btn-outline btn-success" name="Delete" value="{{item.id}}">Delete</button>   
+                            </form>                             
                         </td>
                     {% else %}
-                        <td>Done</td>
+                        <td bgcolor= "green">Done</td>
                         <td>{{ item.task }}</td>
                         <td>{{ item.Time }}</td>
+                        <td>&nbsp</td>
                         <td>
-                        <button class="btn btn-outline btn-success">Delete</button>
+                            <form action="{{ url_for('delete')}}" method="post">
+                            <button class="btn btn-outline btn-success" name="Delete" value="{{item.id}}">Delete</button>
+                            </form>
                         </td>
                     {% endif %}
                 </tr>
             {% else %}
+                <!--If the list empty show dummy data-->
                 <tr>
-                    <td>Incomplete</td>
+                    <td bgcolor= "red">Incomplete</td>
                     <td>Add something to the to do list</td>
                     <td>00:00:00</td>
                     <td>
-                        <button class="btn btn-outline btn-success">Don't you dare press this button </button>                                
+                        <form action="{{ url_for('change')}}" method="post">
+                        <button class="btn btn-outline btn-success" disabled>Mark as complete</button>
+                        </form>                                
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+{% endblock %}
+{% block style %}
+    <!--Style block-->
+    <style>
+    .Form_container{
+        margin:auto;
+        width:22%;
+    }
+    </style>
 {% endblock %}

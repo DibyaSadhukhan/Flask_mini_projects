@@ -21,7 +21,7 @@
         </h1>
       <!-- Navbar here -->
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
-            <a class="navbar-brand" href="{{ url_for('home')}}">Home</a>
+            <a class="navbar-brand" href="{{ url_for('landing')}}">New List</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -36,13 +36,17 @@
             </ul>
         </div>
         </nav>
-      <!-- Future Content here -->
+      <!-- the content of the page -->
         {% block content %}
 
         {% endblock %}
    </body>
    <!--style of the page -->
+    {% block style %}
+
+    {% endblock %}
    <style>
+
         body {
             background-color: #212121;
             color: white;
