@@ -26,8 +26,5 @@ def weather():
     }
     print(data)
     return render_template(data)
-  
-  
-  
 if __name__ == '__main__':
     app.run(debug = True)
