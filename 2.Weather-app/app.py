@@ -1,7 +1,7 @@
 #importing required packages
 from flask import Flask, render_template, request
 import json
-import urllib.request  
+import requests 
 app = Flask(__name__, template_folder="Templates")
 @app.route('/', methods =['POST', 'GET'])
 def weather():
@@ -11,20 +11,18 @@ def weather():
         city = request.form['city']
     else:
         city = 'kolkata'
-    api = 'bcaa1591c929667707915660c6f49782'
-    source = urllib.request.urlopen('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid =' + api).read()
-    list_of_data = json.loads(source)
-  
-    # data for variable list_of_data
-    data = {
-        "country_code": str(list_of_data['sys']['country']),
-        "coordinate": str(list_of_data['coord']['lon']) + ' ' 
-                    + str(list_of_data['coord']['lat']),
-        "temp": str(list_of_data['main']['temp']) + 'k',
-        "pressure": str(list_of_data['main']['pressure']),
-        "humidity": str(list_of_data['main']['humidity']),
-    }
-    print(data)
-    return render_template(data)
+    api = "fb33008a8d6dfdee22a79b18a5045d08"
+    URL='http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid =' + api
+    response = requests.get(URL)
+    if response.status_code == 200:
+        data = response.json()
+        main = data['main']
+        temperature = main['temp']
+        humidity = main['humidity']
+        pressure = main['pressure']
+        report = data['weather']
+        return render_template('index.html',temp=temperature,humidity=humidity,pressure=pressure,report=report)
+    else:
+        return render_template('error.html')
 if __name__ == '__main__':
     app.run(debug = True)
