@@ -14,27 +14,39 @@
 <div class="Form_container">
 </div>
 <div class="flex">
-    <div>
     <div class="input-group">
         <form class="form" action="{{ url_for('home')}}" method="post">
             <input class="form-control" type="text" name="city" id="City" placeholder="Enter the name of the city whose weather you wanted to find out">
         </form>
         <div>
-        <button type="submit" class="btn btn-primary">Add</button>
+            <button type="submit" class="btn btn-primary">Search</button>
         </div>
-    </div>
     </div>
 </div>
 <br>
-{{ city }}
-{{temp}}
+<div class="city">
+<h1>{{ city }}</h1>
+</div>
+<div class="weather">
+<h2>{{temp}}</h2>
+</div>
 {% endblock %}
 {% block style %}
     <!--Style block-->
     <style>        
-        .flex {
+        .input-group{
             display: flex;
             flex-direction: row;
+            align-items: flex-end;
+            justify-content: space-around;
+        }
+        .form{
+            width: max-content;
+            padding: 0px;
+        }
+        .form-control{
+            width: 280%;
+            height: 10%;
         }
         .input-group{
             margin:auto;
