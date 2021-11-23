@@ -17,6 +17,7 @@ def home():
     response = requests.get(URL)
     if response.status_code == 200:
         data = response.json()
+        #getting the data from the api response
         main = data['main']
         temperature = main['temp']
         humidity = main['humidity']
