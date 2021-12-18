@@ -10,47 +10,23 @@
 {% endblock %}
 {% block content %}
 <!--form to add the new item in the list-->
-<br>
-<div class="Form_container">
-</div>
-<div class="flex">
-    <div class="input-group">
+    <br>
+    <div class="Search_bar">
         <form class="form" action="{{ url_for('home')}}" method="post">
             <input class="form-control" type="text" name="city" id="City" placeholder="Enter the name of the city whose weather you wanted to find out">
-        </form>
-        <div>
             <button type="submit" class="btn btn-primary">Search</button>
-        </div>
+        </form>
     </div>
-</div>
-<br>
-<div class="city">
-<h1>{{ city }}</h1>
-</div>
-<div class="weather">
-<h2>{{temp}}</h2>
-</div>
+    <br>
+    <div class="city">
+        <h1>{{ city }}</h1>
+    </div>
+    <div class="weather">
+        <h2>{{temp}}</h2>
+    </div>
 {% endblock %}
 {% block style %}
     <!--Style block-->
     <style>        
-        .input-group{
-            display: flex;
-            flex-direction: row;
-            align-items: flex-end;
-            justify-content: space-around;
-        }
-        .form{
-            width: max-content;
-            padding: 0px;
-        }
-        .form-control{
-            width: 280%;
-            height: 10%;
-        }
-        .input-group{
-            margin:auto;
-            width:75%;
-        }
     </style>
 {% endblock %}
