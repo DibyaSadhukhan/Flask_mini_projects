@@ -10,7 +10,7 @@ def home():
     if request.method == 'POST':
         CITY = request.form['city']
     else:
-        CITY = "Kolkata"
+        CITY = "Delhi"
     API_KEY = "fb33008a8d6dfdee22a79b18a5045d08"
     # upadting the URL
     URL = "https://api.openweathermap.org/data/2.5/weather?q=" + CITY + "&appid=" + API_KEY +"&units=metric"
