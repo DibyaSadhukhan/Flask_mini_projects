@@ -1,1 +1,1 @@
-A weather app using Flask 
+A weather app using Flask.
